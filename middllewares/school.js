@@ -1,8 +1,8 @@
-const School = require("../models/school");
+const school = require("../models/school");
 
 const findAllSchools = async (req, res, next) => {
   try {
-    req.schoolArray = await School.find({});
+    req.schoolArray = await school.find({});
     next();
   } catch (e) {
     console.log(`При запросе всех школ возникла ошибка: ${e}`);
@@ -10,4 +10,4 @@ const findAllSchools = async (req, res, next) => {
   }
 };
 
-module.exports = findAllSchools;
+module.exports = { findAllSchools };
