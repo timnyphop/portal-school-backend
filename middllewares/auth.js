@@ -2,6 +2,7 @@ const user = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const registerUser = async (req, res, next) => {
+  console.log("/post/registration");
   const { name, email, password, age } = req.body;
   if (!name || !email || !password || !age) {
     return res.status(500).json({ message: "Something went wrong" });
@@ -27,6 +28,7 @@ const registerUser = async (req, res, next) => {
 };
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log("/GET/Login");
   try {
     const existingUser = await user.findOne({ email });
     if (!existingUser) {
