@@ -1,8 +1,10 @@
 const apiRouter = require("express").Router();
 const AuthRouter = require("./auth");
+const likeRouter = require("./like");
 const SchoolRouter = require("./school");
 const userRouter = require("./user");
 apiRouter.use("/api", SchoolRouter);
 apiRouter.use("/api", userRouter);
 apiRouter.use("/api", AuthRouter);
+apiRouter.use("/api", likeRouter);
 module.exports = apiRouter;

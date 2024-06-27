@@ -54,4 +54,18 @@ const loginUser = async (req, res, next) => {
     console.log(e);
   }
 };
-module.exports = { registerUser, loginUser };
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(403).json({ message: "Требуется аутентификация" });
+  }
+  try {
+    const decoded = jwt.verify(token, "пусто");
+    req.user = decoded;
+    next();
+  } catch (e) {
+    res.status(401).json({ message: "Недействительный токен" });
+    console.log(e);
+  }
+};
+module.exports = { registerUser, loginUser, verifyToken };

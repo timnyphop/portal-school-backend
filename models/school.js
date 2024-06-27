@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
+const UserModel = require("./user");
 const schoolSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  class: {
+  classes: {
     type: String,
     required: true,
   },
@@ -28,6 +29,7 @@ const schoolSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  likesBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   imageUrl: {
     type: String,
     required: true,
