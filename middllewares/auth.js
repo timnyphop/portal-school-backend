@@ -20,12 +20,17 @@ const registerUser = async (req, res, next) => {
       age,
     });
     await newUser.save();
-    req.user = newUser;
-    next();
+
+    const token = jwt.sign({ email: newUser.email, id: newUser._id }, "пусто", {
+      expiresIn: "1h",
+    });
+    res.status(201).json({ token, user: newUser });
   } catch (e) {
     console.log(e);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
   console.log("/GET/Login");
